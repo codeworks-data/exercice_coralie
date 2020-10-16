@@ -1,1 +1,1 @@
-from .main import PresentsQueue, Sled, Elf, TooMuchWorksError
+from .main import PresentsQueue, Sled, Elf, TooMuchWorksError, Santa, Reindeer
