@@ -35,6 +35,7 @@ class Sled(object):
         return present_weight <= self.remaining_capacity
 
     def add_present_to_traineau(self, present_weight):
+        self.responsable_elf.wrap_present(present_weight)
         self.presents_weights.append(present_weight)
         self.remaining_capacity -= present_weight
         if self.remaining_capacity == 0:
@@ -143,10 +144,11 @@ class Santa(object):
                 del sled_to_fill
 
 
-parser = argparse.ArgumentParser(description='Appeler le pere noel pour distributer les cadeaux.')
-parser.add_argument('--n-presents', metavar='N', type=int, help='Nombre de cadeaux', default=DEFAULT_NUMBER_OF_PRESENTS)
-
 if __name__ == '__main__':
+
+    parser = argparse.ArgumentParser(description='Appeler le pere noel pour distributer les cadeaux.')
+    parser.add_argument('--n-presents', metavar='N', type=int, help='Nombre de cadeaux',
+                        default=DEFAULT_NUMBER_OF_PRESENTS)
 
     args = parser.parse_args()
     print(args)
@@ -154,6 +156,3 @@ if __name__ == '__main__':
 
     our_santa = Santa(n_presents)
     our_santa.distribute_presents()
-
-
-    print('Hey! I\'working')
