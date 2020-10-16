@@ -2,9 +2,11 @@ from queue import Queue
 import numpy as np
 import random
 from time import sleep
+import argparse
+
 
 PRESENT_SIZES = np.array([1, 2, 5])
-NUMBER_OF_PRESENTS = 20
+DEFAULT_NUMBER_OF_PRESENTS = 20
 
 
 class PresentsQueue(Queue):
@@ -89,11 +91,9 @@ class Reindeer(object):
 
     def deliver_presents(self):
         random_number = random.randint(0, 4)
-        print(random_number)
         acknowledgment = 0
         if random_number > 0:
             print('Livraison lancee')
-            print(self.sled.get_presents_weights())
             for i, present in enumerate(self.sled.get_presents_weights()):
                 print(
                     f'Cadeau numero {i + 1} est en cours de livraison'
@@ -143,9 +143,16 @@ class Santa(object):
                 del sled_to_fill
 
 
+parser = argparse.ArgumentParser(description='Appeler le pere noel pour distributer les cadeaux.')
+parser.add_argument('--n-presents', metavar='N', type=int, help='Nombre de cadeaux', default=DEFAULT_NUMBER_OF_PRESENTS)
+
 if __name__ == '__main__':
 
-    our_santa = Santa(NUMBER_OF_PRESENTS)
+    args = parser.parse_args()
+    print(args)
+    n_presents = args.n_presents
+
+    our_santa = Santa(n_presents)
     our_santa.distribute_presents()
 
 
