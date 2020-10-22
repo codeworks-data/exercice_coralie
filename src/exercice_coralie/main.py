@@ -1,11 +1,9 @@
-from queue import Queue
-import numpy as np
 import random
 from time import sleep
 import argparse
 
 SLED_MAX_CAPACITY = 12
-PRESENT_SIZES = np.array([1, 2, 5])
+PRESENT_SIZES = [1, 2, 5]
 DEFAULT_NUMBER_OF_PRESENTS = 20
 
 
@@ -14,7 +12,7 @@ class Sled(object):
     Le traineau
     """
     def __init__(self, MAX_CAPACITY=12):
-        self.MAX_CAPACITY = 12
+        self.MAX_CAPACITY = MAX_CAPACITY
         self.presents_weights = []
 
     def get_remaining_capacity(self):
@@ -77,7 +75,7 @@ class Elf(object):
         return self.sled
 
     def notify_work_done(self):
-        print('Traineau: Tiens notre cher nain! Le traineau est rempli! Bravo!')
+        print('Sled: Hey elf! The sled is full! Bravo!')
         self.is_done_working = True
 
 
@@ -93,20 +91,20 @@ class Reindeer(object):
         random_number = random.randint(0, 4)
         acknowledgment = False
         if random_number > 0:
-            print('Livraison lancee')
+            print('Delivery started')
             counter = 1
             while not self.sled.is_empty():
                 print(
-                    f'Cadeau numero {counter} est en cours de livraison'
-                    f', ca prendra {self.TIME_TO_DELIVER_PER_PRESENT} secondes'
+                    f'Present number {counter} is being delivered'
+                    f', It will take {self.TIME_TO_DELIVER_PER_PRESENT} seconds'
                 )
                 sleep(self.TIME_TO_DELIVER_PER_PRESENT)
                 self.sled.remove_present()
                 counter = counter+1
-                print('Livre')
+                print('Delivered')
             acknowledgment = True
         else:
-            print('Ils ont faim :/')
+            print('The reindeers are hungry :/')
 
         return acknowledgment
 
@@ -143,14 +141,13 @@ class Santa(object):
 
 if __name__ == '__main__':
 
-    parser = argparse.ArgumentParser(description='Appeler le pere noel pour distributer les cadeaux.')
-    parser.add_argument('--n-presents', metavar='N', type=int, help='Nombre de cadeaux',
+    parser = argparse.ArgumentParser(description='Call Santa to deliver presents.')
+    parser.add_argument('--n-presents', metavar='N', type=int, help='Number of presents',
                         default=DEFAULT_NUMBER_OF_PRESENTS)
 
     args = parser.parse_args()
 
     n_presents = args.n_presents
-    #presents = random.choices(PRESENT_SIZES, k=n_presents)
 
     our_santa = Santa(n_presents)
     our_santa.distribute_presents()
