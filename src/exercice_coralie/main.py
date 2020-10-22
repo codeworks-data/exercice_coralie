@@ -4,7 +4,7 @@ import random
 from time import sleep
 import argparse
 
-
+SLED_MAX_CAPACITY = 12
 PRESENT_SIZES = np.array([1, 2, 5])
 DEFAULT_NUMBER_OF_PRESENTS = 20
 
@@ -26,16 +26,18 @@ class Sled(object):
     """
     Le traineau
     """
-    def __init__(self):
-        self.remaining_capacity = 12
+    def __init__(self, MAX_CAPACITY=12):
+        self.MAX_CAPACITY = 12
         self.presents_weights = []
 
+    def get_remaining_capacity(self):
+        return self.MAX_CAPACITY-sum(self.presents_weights)
+
     def can_add_present(self, present_weight):
-        return present_weight <= self.remaining_capacity
+        return present_weight <= self.get_remaining_capacity()
 
     def add_present(self, present_weight):
         self.presents_weights.append(present_weight)
-        self.remaining_capacity -= present_weight
 
     def is_full(self):
         return self.remaining_capacity == 0
