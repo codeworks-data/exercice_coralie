@@ -39,8 +39,11 @@ class Sled(object):
     def add_present(self, present_weight):
         self.presents_weights.append(present_weight)
 
-    def is_full(self):
-        return self.remaining_capacity == 0
+    def is_empty(self):
+        return len(self.presents_weights) == 0
+
+    def remove_present(self):
+        del self.presents_weights[0]
 
     def get_presents_weights(self):
         return self.presents_weights
@@ -101,18 +104,20 @@ class Reindeer(object):
 
     def deliver_presents(self):
         random_number = random.randint(0, 4)
-        acknowledgment = 0
+        acknowledgment = False
         if random_number > 0:
             print('Livraison lancee')
-            for i, present in enumerate(self.sled.get_presents_weights()):
+            counter = 1
+            while not self.sled.is_empty():
                 print(
-                    f'Cadeau numero {i + 1} est en cours de livraison'
+                    f'Cadeau numero {counter} est en cours de livraison'
                     f', ca prendra {self.TIME_TO_DELIVER_PER_PRESENT} secondes'
                 )
                 sleep(self.TIME_TO_DELIVER_PER_PRESENT)
+                self.sled.remove_present()
+                counter = counter+1
                 print('Livre')
-            self.sled.set_presents_weights([])
-            acknowledgment = 1
+            acknowledgment = True
         else:
             print('Ils ont faim :/')
 
