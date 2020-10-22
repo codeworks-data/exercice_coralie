@@ -9,19 +9,6 @@ PRESENT_SIZES = np.array([1, 2, 5])
 DEFAULT_NUMBER_OF_PRESENTS = 20
 
 
-class PresentsQueue(Queue):
-    """
-    La queue pour les cadeaux
-    """
-
-    def __init__(self, number_of_presents):
-        super().__init__(number_of_presents)
-        random_presents_sizes_index = np.random.randint(0, 3, number_of_presents)
-        random_present_sizes = PRESENT_SIZES[random_presents_sizes_index]
-        for present_size in random_present_sizes:
-            self.put(present_size)
-
-
 class Sled(object):
     """
     Le traineau
@@ -129,19 +116,21 @@ class Santa(object):
     Santa distributing presents
     """
     def __init__(self, number_of_presents):
-        self.presents_queue = PresentsQueue(number_of_presents)
+        self.presents_queue = random.choices(PRESENT_SIZES, k=number_of_presents)
         self.elf = Elf()
 
     def distribute_presents(self):
 
-        while not self.presents_queue.empty():
+        while len(self.presents_queue):
 
-            current_present = self.presents_queue.get()
+            current_present = self.presents_queue[0]
+            del self.presents_queue[0]
             print(f'Processing present of size: {current_present} Kg(s)')
 
-            if self.elf.can_add_present(current_present):
+            present_to_add = self.elf.can_add_present(current_present)
+            if present_to_add:
                 self.elf.wrap_present(current_present)
-            else:
+            if (not present_to_add) or (not len(self.presents_queue)):
                 self.elf.notify_work_done()
                 sled = self.elf.get_sled()
                 reindeer = Reindeer(sled)
