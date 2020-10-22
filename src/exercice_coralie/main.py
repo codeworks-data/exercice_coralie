@@ -29,17 +29,13 @@ class Sled(object):
     def __init__(self):
         self.remaining_capacity = 12
         self.presents_weights = []
-        self.responsable_elf = Elf()
 
-    def add_is_possible(self, present_weight):
+    def can_add_present(self, present_weight):
         return present_weight <= self.remaining_capacity
 
-    def add_present_to_traineau(self, present_weight):
-        self.responsable_elf.wrap_present(present_weight)
+    def add_present(self, present_weight):
         self.presents_weights.append(present_weight)
         self.remaining_capacity -= present_weight
-        if self.remaining_capacity == 0:
-            self.responsable_elf.notify_work_done()
 
     def is_full(self):
         return self.remaining_capacity == 0
@@ -56,6 +52,7 @@ class TooMuchWorksError(Exception):
     def __init__(self, message):
         self.message = message
 
+
 class Elf(object):
     """
     Le nain
@@ -67,6 +64,10 @@ class Elf(object):
             5: 2,
         }
         self.is_done_working = False
+        self.sled = Sled()
+
+    def can_add_present(self, present_weight):
+        return self.sled.can_add_present(present_weight)
 
     def wrap_present(self, present_weight):
         if self.is_done_working:
@@ -74,8 +75,14 @@ class Elf(object):
                 'Calling \'Elf.wrap_present\' is porhibited while \'is_done_working\' is True'
             )
         print(f'Wrapping present of size {present_weight}Kg(s)')
-        print(f'Time to wrap: {self.weight_to_wrapping_time[present_weight]}s')
+        time_to_wrap = self.weight_to_wrapping_time[present_weight]
+        print(f'Time to wrap: {time_to_wrap}s')
+        sleep(time_to_wrap)
         print(f'Present wrapped')
+        self.sled.add_present(present_weight)
+
+    def get_sled(self):
+        return self.sled
 
     def notify_work_done(self):
         print('Traineau: Tiens notre cher nain! Le traineau est rempli! Bravo!')
@@ -114,18 +121,9 @@ class Santa(object):
     """
     Santa distributing presents
     """
-    def __init__(self,number_of_presents):
+    def __init__(self, number_of_presents):
         self.presents_queue = PresentsQueue(number_of_presents)
-        self.non_filled_sleds = []
-
-    def get_index_sled_to_fill(self, present_weight):
-
-        for i, sled in enumerate(self.non_filled_sleds):
-            if sled.add_is_possible(present_weight):
-                return i
-        new_sled = Sled()
-        self.non_filled_sleds.append(new_sled)
-        return len(self.non_filled_sleds)-1
+        self.elf = Elf()
 
     def distribute_presents(self):
 
@@ -133,15 +131,16 @@ class Santa(object):
 
             current_present = self.presents_queue.get()
             print(f'Processing present of size: {current_present} Kg(s)')
-            index_sled_to_fill = self.get_index_sled_to_fill(current_present)
-            sled_to_fill = self.non_filled_sleds[index_sled_to_fill]
-            sled_to_fill.add_present_to_traineau(current_present)
-            if sled_to_fill.is_full():
-                reindeer = Reindeer(sled_to_fill)
+
+            if self.elf.can_add_present(current_present):
+                self.elf.wrap_present(current_present)
+            else:
+                self.elf.notify_work_done()
+                sled = self.elf.get_sled()
+                reindeer = Reindeer(sled)
                 reindeer.deliver_presents()
-                del self.non_filled_sleds[index_sled_to_fill]
                 del reindeer
-                del sled_to_fill
+                self.elf = Elf()
 
 
 if __name__ == '__main__':
@@ -151,8 +150,9 @@ if __name__ == '__main__':
                         default=DEFAULT_NUMBER_OF_PRESENTS)
 
     args = parser.parse_args()
-    print(args)
+
     n_presents = args.n_presents
+    #presents = random.choices(PRESENT_SIZES, k=n_presents)
 
     our_santa = Santa(n_presents)
     our_santa.distribute_presents()
