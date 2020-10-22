@@ -145,7 +145,9 @@ class Santa(object):
                 self.elf.notify_work_done()
                 sled = self.elf.get_sled()
                 reindeer = Reindeer(sled)
-                reindeer.deliver_presents()
+                acknowledgment = reindeer.deliver_presents()
+                while not acknowledgment:
+                    acknowledgment = reindeer.deliver_presents()
                 del reindeer
                 self.elf = Elf()
 
