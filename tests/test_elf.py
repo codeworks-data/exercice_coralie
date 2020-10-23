@@ -13,7 +13,7 @@ class ElfTest(unittest.TestCase):
         sample_elf.notify_work_done()
         self.assertEqual(sample_elf.is_done_working, True)
 
-    def test_wrap_when_sled_empty(self):
+    def test_no_exception_when_not_done_working(self):
         sample_elf = Elf()
         sample_elf.is_done_working = False
         raised = False
@@ -23,7 +23,7 @@ class ElfTest(unittest.TestCase):
             raised = True
         self.assertFalse(raised, 'Exception raised')
 
-    def test_dont_wrap_when_sled_full(self):
+    def test_exception_when_done_working(self):
         sample_elf = Elf()
         sample_elf.is_done_working = True
         self.assertRaises(TooMuchWorksError, sample_elf.wrap_present, 1)
