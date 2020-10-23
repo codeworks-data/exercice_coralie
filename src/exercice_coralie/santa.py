@@ -1,7 +1,7 @@
 import random
 
-from elf import Elf
-from reindeer import Reindeer
+from .elf import Elf
+from .reindeer import Reindeer
 
 PRESENT_SIZES = [1, 2, 5]
 

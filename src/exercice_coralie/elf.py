@@ -1,7 +1,7 @@
 from time import sleep
 
-from sled import Sled
-from exceptions import TooMuchWorksError
+from .sled import Sled
+from .exceptions import TooMuchWorksError
 
 
 class Elf(object):
