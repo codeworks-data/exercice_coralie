@@ -1,4 +1,4 @@
 class TooMuchWorksError(Exception):
-    """Exception lorsque le nain a beaucoup travaillé."""
+    """Exception when an elf is asked to work, when he already finished his job."""
     def __init__(self, message: str):
         self.message = message

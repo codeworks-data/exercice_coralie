@@ -8,14 +8,17 @@ PRESENT_SIZES = [1, 2, 5]
 
 class Santa(object):
     """
-    Santa distributing presents
+    Santa has for role to deliver an 'n' number of presents, by orchestrating the work with the elves and reindeers
     """
     def __init__(self, number_of_presents: int):
         self.presents_queue = random.choices(PRESENT_SIZES, k=number_of_presents)
         self.elf = Elf()
 
     def distribute_presents(self):
-
+        """
+        Distribute the presents present in the queue
+        :return: None
+        """
         while len(self.presents_queue):
 
             current_present = self.presents_queue[0]
@@ -30,6 +33,7 @@ class Santa(object):
                 sled = self.elf.get_sled()
                 reindeer = Reindeer(sled)
                 acknowledgment = reindeer.deliver_presents()
+                # If the reindeer refuse to work ask them again
                 while not acknowledgment:
                     acknowledgment = reindeer.deliver_presents()
                 del reindeer
