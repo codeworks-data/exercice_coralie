@@ -31,6 +31,7 @@ class Santa(object):
             if (not present_to_add) or (not len(self.presents_queue)):
                 self.elf.notify_work_done()
                 sled = self.elf.get_sled()
+                sled.set_status('delivering')
                 reindeer = Reindeer(sled)
                 acknowledgment = reindeer.deliver_presents()
                 # If the reindeer refuse to work ask them again

@@ -4,6 +4,7 @@ class Sled(object):
     """
     def __init__(self, max_capacity: int = 12):
         self.MAX_CAPACITY = max_capacity
+        self.status = 'filling'
         self.presents_weights = []
 
     def get_remaining_capacity(self):
@@ -49,3 +50,11 @@ class Sled(object):
         :return: List, list of the presents weights
         """
         return self.presents_weights
+
+    def set_status(self, status):
+        """
+        Status setter
+        :return: None
+        """
+
+        self.status = status
