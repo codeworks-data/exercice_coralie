@@ -2,17 +2,17 @@ class Sled(object):
     """
     Le traineau
     """
-    def __init__(self, max_capacity=12):
+    def __init__(self, max_capacity: int = 12):
         self.MAX_CAPACITY = max_capacity
         self.presents_weights = []
 
     def get_remaining_capacity(self):
         return self.MAX_CAPACITY-sum(self.presents_weights)
 
-    def can_add_present(self, present_weight):
+    def can_add_present(self, present_weight: int):
         return present_weight <= self.get_remaining_capacity()
 
-    def add_present(self, present_weight):
+    def add_present(self, present_weight: int):
         self.presents_weights.append(present_weight)
 
     def is_empty(self):
@@ -24,5 +24,5 @@ class Sled(object):
     def get_presents_weights(self):
         return self.presents_weights
 
-    def set_presents_weights(self, present_weights):
+    def set_presents_weights(self, present_weights: int):
         self.presents_weights = present_weights

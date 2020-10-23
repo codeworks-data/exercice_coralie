@@ -1,12 +1,14 @@
 import random
 from time import sleep
 
+from .sled import Sled
+
 
 class Reindeer(object):
     """
     Le renne
     """
-    def __init__(self, sled):
+    def __init__(self, sled: Sled):
         self.TIME_TO_DELIVER_PER_PRESENT = .5
         self.sled = sled
 

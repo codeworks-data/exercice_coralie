@@ -17,10 +17,10 @@ class Elf(object):
         self.is_done_working = False
         self.sled = Sled()
 
-    def can_add_present(self, present_weight):
+    def can_add_present(self, present_weight: int):
         return self.sled.can_add_present(present_weight)
 
-    def wrap_present(self, present_weight):
+    def wrap_present(self, present_weight: int):
         if self.is_done_working:
             raise TooMuchWorksError(
                 'Calling \'Elf.wrap_present\' is porhibited while \'is_done_working\' is True'

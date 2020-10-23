@@ -10,7 +10,7 @@ class Santa(object):
     """
     Santa distributing presents
     """
-    def __init__(self, number_of_presents):
+    def __init__(self, number_of_presents: int):
         self.presents_queue = random.choices(PRESENT_SIZES, k=number_of_presents)
         self.elf = Elf()
 
