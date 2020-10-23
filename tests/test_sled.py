@@ -1,5 +1,5 @@
 import unittest
-from exercice_coralie import Sled
+from presents_distributing_lib import Sled
 
 
 class SledTest(unittest.TestCase):

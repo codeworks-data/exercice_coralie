@@ -1,6 +1,6 @@
 import argparse
 
-from exercice_coralie.santa import Santa
+from presents_distributing_lib.santa import Santa
 
 SLED_MAX_CAPACITY = 12
 DEFAULT_NUMBER_OF_PRESENTS = 20

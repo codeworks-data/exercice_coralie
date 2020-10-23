@@ -1,5 +1,5 @@
 import unittest
-from exercice_coralie import Elf, TooMuchWorksError
+from presents_distributing_lib import Elf, TooMuchWorksError
 
 
 class ElfTest(unittest.TestCase):
