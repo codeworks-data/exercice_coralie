@@ -10,7 +10,7 @@ class SantaTest(unittest.TestCase):
         expected_number_of_presents = number_of_presents_initial + number_of_presents_to_add
 
         sample_santa = Santa(number_of_presents_initial)
-        sample_santa = sample_santa.add_more_presents(number_of_presents_to_add)
+        sample_santa.add_more_presents(number_of_presents_to_add)
 
         actual_number_presents = len(sample_santa.presents_queue)
         self.assertEqual(expected_number_of_presents, actual_number_presents)
@@ -21,7 +21,7 @@ class SantaTest(unittest.TestCase):
         number_of_presents_to_add = 3
 
         sample_santa = Santa(number_of_presents_initial)
-        sample_santa = sample_santa.add_more_presents(number_of_presents_to_add)
+        sample_santa.add_more_presents(number_of_presents_to_add)
 
         weights_of_presents_added = sample_santa.presents_queue[-number_of_presents_to_add:]
         all_weights_are_normal_bool = all([weight in normal_weights for weight in weights_of_presents_added])

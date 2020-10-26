@@ -13,8 +13,12 @@ class Santa(object):
     def __init__(self, number_of_presents: int):
         self.presents_queue = random.choices(PRESENT_SIZES, k=number_of_presents)
         self.elf = Elf()
+        self.reindeer = Reindeer()
 
     def add_more_presents(self, number_of_presents: int):
+        """
+        Add more presents to presents' queue of
+        """
         random_presents_weights_to_add = random.choices(PRESENT_SIZES, k=number_of_presents)
         self.presents_queue.extend(random_presents_weights_to_add)
 
@@ -36,10 +40,11 @@ class Santa(object):
                 self.elf.notify_work_done()
                 sled = self.elf.get_sled()
                 sled.set_status('delivering')
-                reindeer = Reindeer(sled)
-                acknowledgment = reindeer.deliver_presents()
+
+                self.reindeer.set_sled(sled)
+                acknowledgment = self.reindeer.deliver_presents()
                 # If the reindeer refuse to work ask them again
                 while not acknowledgment:
-                    acknowledgment = reindeer.deliver_presents()
-                del reindeer
+                    acknowledgment = self.reindeer.deliver_presents()
+
                 self.elf = Elf()

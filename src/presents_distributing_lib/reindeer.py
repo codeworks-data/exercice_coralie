@@ -8,8 +8,14 @@ class Reindeer(object):
     """
     The reindeer has for role to deliver the presents one by one from the sled
     """
-    def __init__(self, sled: Sled):
+    def __init__(self):
         self.TIME_TO_DELIVER_PER_PRESENT = .5
+        self.sled = None
+
+    def set_sled(self, sled: Sled):
+        """
+        Set a new sled to deliver
+        """
         self.sled = sled
 
     def deliver_presents(self):
