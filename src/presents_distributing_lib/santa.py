@@ -14,6 +14,10 @@ class Santa(object):
         self.presents_queue = random.choices(PRESENT_SIZES, k=number_of_presents)
         self.elf = Elf()
 
+    def add_more_presents(self, number_of_presents: int):
+        random_presents_weights_to_add = random.choices(PRESENT_SIZES, k=number_of_presents)
+        self.presents_queue.extend(random_presents_weights_to_add)
+
     def distribute_presents(self):
         """
         Distribute the presents present in the queue
