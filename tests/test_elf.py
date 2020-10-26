@@ -11,7 +11,7 @@ class ElfTest(unittest.TestCase):
     def test_notify_work_is_done(self):
         sample_elf = Elf()
         sample_elf.notify_work_done()
-        self.assertEqual(sample_elf.is_done_working, True)
+        self.assertTrue(sample_elf.is_done_working)
 
     def test_no_exception_when_not_done_working(self):
         sample_elf = Elf()

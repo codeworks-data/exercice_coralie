@@ -12,7 +12,7 @@ class Sled(object):
         Return the weight that the sled can still handle
         :return: int, remaining capacity
         """
-        return self.MAX_CAPACITY-sum(self.presents_weights)
+        return self.MAX_CAPACITY - sum(self.presents_weights)
 
     def can_add_present(self, present_weight: int):
         """

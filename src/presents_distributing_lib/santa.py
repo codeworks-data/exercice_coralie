@@ -23,7 +23,7 @@ class Santa(object):
         Distribute the presents present in the queue
         :return: None
         """
-        while len(self.presents_queue):
+        while self.presents_queue:
 
             current_present = self.presents_queue[0]
             del self.presents_queue[0]
