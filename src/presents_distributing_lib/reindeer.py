@@ -4,13 +4,12 @@ from time import sleep
 from .sled import Sled
 
 
-class Reindeer(object):
+class Reindeer:
     """
     The reindeer has for role to deliver the presents one by one from the sled
     """
-    def __init__(self):
-        self.TIME_TO_DELIVER_PER_PRESENT = .5
-        self.sled = None
+    TIME_TO_DELIVER_PER_PRESENT = .5
+    sled = None
 
     def set_sled(self, sled: Sled):
         """

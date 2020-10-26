@@ -4,18 +4,17 @@ from .sled import Sled
 from .exceptions import TooMuchWorksError
 
 
-class Elf(object):
+class Elf:
     """
     The elf has for role to wrap the presents and fill put them in the sled
     """
-    def __init__(self, ):
-        self.weight_to_wrapping_time = {
-            1: .5,
-            2: 1,
-            5: 2,
-        }
-        self.is_done_working = False
-        self.sled = Sled()
+    weight_to_wrapping_time = {
+        1: .5,
+        2: 1,
+        5: 2,
+    }
+    is_done_working = False
+    sled = Sled()
 
     def can_add_present(self, present_weight: int):
         """
@@ -57,4 +56,11 @@ class Elf(object):
         print('Sled: Hey elf! The sled is full! Bravo!')
         self.is_done_working = True
 
+    def put_back_to_work(self):
+        """
+        Change the flag for when the elf completed his job on one sled
+        :return: None
+        """
+        print('The elf is back to work!')
+        self.is_done_working = False
 

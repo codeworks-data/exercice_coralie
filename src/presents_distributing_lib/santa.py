@@ -2,18 +2,20 @@ import random
 
 from .elf import Elf
 from .reindeer import Reindeer
+from .status_sled import StatusSled
 
 PRESENT_SIZES = [1, 2, 5]
 
 
-class Santa(object):
+class Santa:
     """
     Santa has for role to deliver an 'n' number of presents, by orchestrating the work with the elves and reindeers
     """
+    elf = Elf()
+    reindeer = Reindeer()
+
     def __init__(self, number_of_presents: int):
         self.presents_queue = random.choices(PRESENT_SIZES, k=number_of_presents)
-        self.elf = Elf()
-        self.reindeer = Reindeer()
 
     def add_more_presents(self, number_of_presents: int):
         """
@@ -29,17 +31,16 @@ class Santa(object):
         """
         while self.presents_queue:
 
-            current_present = self.presents_queue[0]
-            del self.presents_queue[0]
+            current_present = self.presents_queue.pop(0)
             print(f'Processing present of size: {current_present} Kg(s)')
 
-            present_to_add = self.elf.can_add_present(current_present)
-            if present_to_add:
+            can_add_current_present = self.elf.can_add_present(current_present)
+            if can_add_current_present:
                 self.elf.wrap_present(current_present)
-            if (not present_to_add) or (not len(self.presents_queue)):
+            if (not can_add_current_present) or (not len(self.presents_queue)):
                 self.elf.notify_work_done()
                 sled = self.elf.get_sled()
-                sled.set_status('delivering')
+                sled.set_status(StatusSled.DELIVERING)
 
                 self.reindeer.set_sled(sled)
                 acknowledgment = self.reindeer.deliver_presents()
@@ -47,4 +48,5 @@ class Santa(object):
                 while not acknowledgment:
                     acknowledgment = self.reindeer.deliver_presents()
 
-                self.elf = Elf()
+                self.elf.put_back_to_work()
+                sled.set_status(StatusSled.FILLING)

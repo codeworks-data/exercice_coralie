@@ -1,11 +1,16 @@
-class Sled(object):
+from .status_sled import StatusSled
+
+
+class Sled:
     """
     The sled to be filled with presents.
     """
+
+    status = StatusSled.FILLING
+    presents_weights = []
+
     def __init__(self, max_capacity: int = 12):
         self.MAX_CAPACITY = max_capacity
-        self.status = 'filling'
-        self.presents_weights = []
 
     def get_remaining_capacity(self):
         """
@@ -51,10 +56,10 @@ class Sled(object):
         """
         return self.presents_weights
 
-    def set_status(self, status):
+    def set_status(self, status: StatusSled):
         """
         Status setter
         :return: None
         """
-
+        print(f'Elf status is set to {status}')
         self.status = status
