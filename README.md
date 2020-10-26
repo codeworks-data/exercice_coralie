@@ -1,6 +1,15 @@
-# exercice_coralie
+# Kata Python Number one
 
-## Assignment (in french)
+## Context and objectives 
+
+This assignment comes in a context of evaluating the technical proficiency in Python of a developer.
+
+The goals of the assignment to produce a solution with:
+* A good POO design that reflects the assignment requirements and constraints
+* A good quality code 
+* A minimum tests on solutions components
+
+## Assignment statement(in french)
 
 
 « Il faut créer une application pour aider le Père Noël à gérer l’usine de cadeaux pour décembre. Elle est à faire en plusieurs étapes :<br/>
@@ -61,9 +70,6 @@ to add or remove a present from the sled
 5. Reindeer class<br/>
 
 The reindeer instance take a sled and deliver it's presents (one by one).
-
-
-
     1. Les cadeaux peuvent être de 3 types :
         1. Petit : il pèse 1kg et met 0.5 seconde à être préparé
         2. Moyen : il pèse 2kg et met 1 seconde à être préparé
