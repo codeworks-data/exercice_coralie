@@ -6,11 +6,11 @@ class Sled:
     The sled to be filled with presents.
     """
 
-    status = StatusSled.FILLING
-    presents_weights = []
 
     def __init__(self, max_capacity: int = 12):
         self.MAX_CAPACITY = max_capacity
+        self.status = StatusSled.FILLING
+        self.presents_weights = []
 
     def get_remaining_capacity(self):
         """

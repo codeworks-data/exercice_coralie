@@ -9,7 +9,9 @@ class Reindeer:
     The reindeer has for role to deliver the presents one by one from the sled
     """
     TIME_TO_DELIVER_PER_PRESENT = .5
-    sled = None
+
+    def __init(self):
+        self.sled = None
 
     def set_sled(self, sled: Sled):
         """

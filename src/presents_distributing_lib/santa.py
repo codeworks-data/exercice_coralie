@@ -11,11 +11,10 @@ class Santa:
     """
     Santa has for role to deliver an 'n' number of presents, by orchestrating the work with the elves and reindeers
     """
-    elf = Elf()
-    reindeer = Reindeer()
-
     def __init__(self, number_of_presents: int):
         self.presents_queue = random.choices(PRESENT_SIZES, k=number_of_presents)
+        self.elf = Elf()
+        self.reindeer = Reindeer()
 
     def add_more_presents(self, number_of_presents: int):
         """

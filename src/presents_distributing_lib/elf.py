@@ -13,8 +13,10 @@ class Elf:
         2: 1,
         5: 2,
     }
-    is_done_working = False
-    sled = Sled()
+
+    def __init__(self):
+        self.is_done_working = False
+        self.sled = Sled()
 
     def can_add_present(self, present_weight: int):
         """
@@ -32,7 +34,7 @@ class Elf:
         """
         if self.is_done_working:
             raise TooMuchWorksError(
-                'Calling \'Elf.wrap_present\' is porhibited while \'is_done_working\' is True'
+                'Calling \'Elf.wrap_present\' is prohibited while \'is_done_working\' is True'
             )
         print(f'Wrapping present of size {present_weight}Kg(s)')
         time_to_wrap = self.weight_to_wrapping_time[present_weight]
