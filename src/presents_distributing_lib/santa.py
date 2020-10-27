@@ -2,9 +2,7 @@ import random
 
 from .elf import Elf
 from .reindeer import Reindeer
-from .status_sled import StatusSled
 from .constants import PRESENT_SIZES
-
 
 
 class Santa:
@@ -39,7 +37,6 @@ class Santa:
             if (not can_add_current_present) or (not len(self.presents_queue)):
                 self.elf.notify_work_done()
                 sled = self.elf.get_sled()
-                sled.set_status(StatusSled.DELIVERING)
 
                 self.reindeer.set_sled(sled)
                 acknowledgment = self.reindeer.deliver_presents()
@@ -48,7 +45,6 @@ class Santa:
                     acknowledgment = self.reindeer.deliver_presents()
 
                 self.elf.put_back_to_work()
-                sled.set_status(StatusSled.FILLING)
 
                 # Add the present that couldn't be added
                 if not can_add_current_present:

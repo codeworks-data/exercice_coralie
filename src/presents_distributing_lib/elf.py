@@ -3,6 +3,7 @@ from time import sleep
 from .sled import Sled
 from .exceptions import TooMuchWorksError
 from .constants import WEIGHT_TO_WRAPPING_TIME
+from .status_sled import StatusSled
 
 
 class Elf:
@@ -52,6 +53,7 @@ class Elf:
         """
         print('Sled: Hey elf! The sled is full! Bravo!')
         self.is_done_working = True
+        self.sled.set_status(StatusSled.FILLING)
 
     def put_back_to_work(self):
         """
@@ -60,4 +62,5 @@ class Elf:
         """
         print('The elf is back to work!')
         self.is_done_working = False
+        self.sled.set_status(StatusSled.DELIVERING)
 
