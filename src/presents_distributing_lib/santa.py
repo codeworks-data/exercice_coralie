@@ -3,8 +3,8 @@ import random
 from .elf import Elf
 from .reindeer import Reindeer
 from .status_sled import StatusSled
+from .constants import PRESENT_SIZES
 
-PRESENT_SIZES = [1, 2, 5]
 
 
 class Santa:

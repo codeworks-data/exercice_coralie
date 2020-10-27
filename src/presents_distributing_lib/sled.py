@@ -1,4 +1,5 @@
 from .status_sled import StatusSled
+from .constants import DEFAULT_MAX_CAPACITY
 
 
 class Sled:
@@ -6,8 +7,7 @@ class Sled:
     The sled to be filled with presents.
     """
 
-
-    def __init__(self, max_capacity: int = 12):
+    def __init__(self, max_capacity: int = DEFAULT_MAX_CAPACITY):
         self.MAX_CAPACITY = max_capacity
         self.status = StatusSled.FILLING
         self.presents_weights = []

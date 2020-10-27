@@ -2,18 +2,13 @@ from time import sleep
 
 from .sled import Sled
 from .exceptions import TooMuchWorksError
+from .constants import WEIGHT_TO_WRAPPING_TIME
 
 
 class Elf:
     """
     The elf has for role to wrap the presents and fill put them in the sled
     """
-    weight_to_wrapping_time = {
-        1: .5,
-        2: 1,
-        5: 2,
-    }
-
     def __init__(self):
         self.is_done_working = False
         self.sled = Sled()
@@ -37,7 +32,7 @@ class Elf:
                 'Calling \'Elf.wrap_present\' is prohibited while \'is_done_working\' is True'
             )
         print(f'Wrapping present of size {present_weight}Kg(s)')
-        time_to_wrap = self.weight_to_wrapping_time[present_weight]
+        time_to_wrap = WEIGHT_TO_WRAPPING_TIME[present_weight]
         print(f'Time to wrap: {time_to_wrap}s')
         sleep(time_to_wrap)
         print(f'Present wrapped')
