@@ -49,3 +49,7 @@ class Santa:
 
                 self.elf.put_back_to_work()
                 sled.set_status(StatusSled.FILLING)
+
+                # Add the present that couldn't be added
+                if not can_add_current_present:
+                    self.elf.wrap_present(current_present)
